@@ -30,3 +30,7 @@ export const getItem = async (id: string) => {
     throw new Error(error);
   }
 };
+
+export const addToCart = async (id: string) => {
+  await axios.post('https://api.mercadolibre.com/add-to-cart', { id });
+};

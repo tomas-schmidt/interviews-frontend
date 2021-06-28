@@ -2,16 +2,17 @@ import React, { useContext, useCallback, useState } from "react";
 import "./styles.scss";
 import Cart from 'assets/img/cart@2x.png';
 import ItemsContext from "../../context/items-context";
-import RestClient from 'restclient';
+import axios from "axios";
 
 export const AddToCart = (item, accessToken) => {
   const items = useContext(ItemsContext);
   const [isAdded, setIsAdded] = useState(false);
 
   const addToCart = useCallback(async () => {
-    var body = { id: item.id, accessToken };
+    var id = item.id;
+    var body = { id: id, accessToken };
 
-    RestClient.post("https://api.mercadolibre.com/add-to-cart", body)
+    axios.post("http://localhost:8080/add-to-cart", body)
       .then(() => {
         setIsAdded(true);
       })
